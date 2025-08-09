@@ -1,0 +1,118 @@
+// ----- NAVIGATION BAR FUNCTION -----
+function myMenuFunction(){
+  var menuBtn = document.getElementById("myNavMenu");
+  if(menuBtn.className === "nav-menu"){
+    menuBtn.className += " responsive";
+  } else {
+    menuBtn.className = "nav-menu";
+  }
+}
+
+// ----- ADD SHADOW ON NAVIGATION BAR WHILE SCROLLING -----
+window.onscroll = function() {headerShadow()};
+
+function headerShadow() {
+  const navHeader =document.getElementById("header");
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop >  50) {
+    navHeader.style.boxShadow = "0 1px 6px rgba(0, 0, 0, 0.1)";
+    navHeader.style.height = "70px";
+    navHeader.style.lineHeight = "70px";
+  } else {
+    navHeader.style.boxShadow = "none";
+    navHeader.style.height = "90px";
+    navHeader.style.lineHeight = "90px";
+  }
+}
+
+// ----- TYPING EFFECT -----
+var typingEffect = new Typed(".typedText",{
+   strings : ["Developer"],
+   loop : true,
+   typeSpeed : 100, 
+   backSpeed : 80,
+   backDelay : 2000
+})
+
+// ----- ## -- SCROLL REVEAL ANIMATION -- ## -----
+const sr = ScrollReveal({
+      origin: 'top',
+      distance: '80px',
+      duration: 900,    // <-- Reduced for speed!
+      reset: false   
+})
+
+/* -- HOME -- */
+sr.reveal('.featured-text-card',{})
+sr.reveal('.featured-name',{delay: 50})     // Reduced delay
+sr.reveal('.featured-text-info',{delay: 100})
+sr.reveal('.featured-text-btn',{delay: 100})
+sr.reveal('.social_icons',{delay: 100})
+sr.reveal('.featured-image',{delay: 150})
+
+/* -- PROJECT BOX -- */
+sr.reveal('.project-box',{interval: 100})   // Faster interval
+sr.reveal('.profile-container',{interval: 100})
+
+/* -- HEADINGS -- */
+sr.reveal('.top-header',{})
+
+/* ----- ## -- SCROLL REVEAL LEFT_RIGHT ANIMATION -- ## ----- */
+
+// REVEAL EDUCATION TIMELINE ITEMS
+// LEFT
+const srLeftTimeline = ScrollReveal({
+  origin: 'left',
+  distance: '80px',
+  duration: 900,      // <-- Reduced
+  reset: false
+});
+srLeftTimeline.reveal('#education .reveal-left', {delay: 60, interval: 90});
+
+// RIGHT
+const srRightTimeline = ScrollReveal({
+  origin: 'right',
+  distance: '80px',
+  duration: 900,      // <-- Reduced
+  reset: false
+});
+srRightTimeline.reveal('#education .reveal-right', {delay: 60, interval: 90});
+
+/* -- ABOUT INFO & CONTACT INFO -- */
+const srLeft = ScrollReveal({
+  origin: 'left',
+  distance: '80px',
+  duration: 900,      // <-- Reduced
+  reset: false
+})
+srLeft.reveal('.about-info',{delay: 50})
+srLeft.reveal('.contact-info',{delay: 50})
+
+/* -- ABOUT SKILLS & FORM BOX -- */
+const srRight = ScrollReveal({
+  origin: 'right',
+  distance: '80px',
+  duration: 900,      // <-- Reduced
+  reset: false
+})
+srRight.reveal('.skills-box',{delay: 50})
+srRight.reveal('.form-control',{delay: 50})
+
+// ----- CHANGE ACTIVE LINK -----
+const sections = document.querySelectorAll('section[id]')
+
+function scrollActive() {
+  const scrollY = window.scrollY;
+  sections.forEach(current =>{
+    const sectionHeight = current.offsetHeight,
+          sectionTop = current.offsetTop - 50,
+          sectionId = current.getAttribute('id')
+    if(document.querySelector('.nav-menu a[href*=' + sectionId + ']')){
+      if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          document.querySelector('.nav-menu a[href*=' + sectionId + ']').classList.add('active-link')
+      } else {
+        document.querySelector('.nav-menu a[href*=' + sectionId + ']').classList.remove('active-link')
+      }
+    }
+  })
+}
+window.addEventListener('scroll', scrollActive)
